@@ -138,7 +138,7 @@ public class StudentService implements StudentI{
             tx = session.beginTransaction();
             //HQL query to fetch courses based on student email
             String hql = "SELECT c FROM Course c JOIN c.students s WHERE s.email = :email";
-            Query<Course> query = session.createNativeQuery(hql, Course.class);
+            Query<Course> query = session.createQuery(hql, Course.class);
             query.setParameter("email", email);
             courses = query.getResultList();
             tx.commit();
