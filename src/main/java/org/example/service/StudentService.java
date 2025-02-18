@@ -3,6 +3,7 @@ package org.example.service;
 import org.example.dao.StudentI;
 import org.example.model.Course;
 import org.example.model.Student;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -115,6 +116,7 @@ public class StudentService implements StudentI{
                 if (student.getCourses()== null) {
                     student.setCourses(new LinkedHashSet<>());
                 }
+                Hibernate.initialize(student.getCourses());
                 student.getCourses().add(course);
                 session.update(student);
             } else {
