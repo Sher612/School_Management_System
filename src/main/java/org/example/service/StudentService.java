@@ -107,7 +107,7 @@ public class StudentService implements StudentI{
         Transaction tx = null;
         try (Session session = sessionFactory.openSession()) {
             tx = session.beginTransaction();
-            Query<Student> query = session.createQuery("from Student where email = :email", Student.class);
+            Query<Student> query = session.createQuery("SELECT s FROM Student s LEFT JOIN FETCH s.courses WHERE email = :email", Student.class);
             query.setParameter("email", email);
             Student student = (Student) query.uniqueResult();
             Course course = session.get(Course.class, courseId);
